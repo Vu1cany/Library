@@ -4,6 +4,7 @@ import jakarta.validation.constraints.*;
 
 public class Book {
     private int id;
+
     @Pattern(regexp = "[А-Я].+", message = "Корректный формат названия: Название")
     @Size(max = 100, message = "Слишком длинное название")
     private String name;
@@ -11,6 +12,7 @@ public class Book {
     @Pattern(regexp = "[А-Я][а-я]+ [А-Я][а-я]+", message = "Корректный формат автора: Имя Фамилия")
     @Size(max = 100, message = "Слишком длинные имя и фамилия")
     private String author;
+
     @Min(value = 1, message = "Год создания должен быть > 1")
     @Size(min = 1, message = "Поле не может быть пустым")
     private int year;
