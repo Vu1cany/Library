@@ -11,7 +11,7 @@
 .idea/**/usage.statistics.xml
 .idea/**/dictionaries
 .idea/**/shelf
-.idea/
+
 
 # AWS User-specific
 .idea/**/aws.xml
@@ -194,3 +194,4 @@ buildNumber.properties
 .classpath
 
 # End of https://www.toptal.com/developers/gitignore/api/maven,macos,java,intellij
+.idea/
