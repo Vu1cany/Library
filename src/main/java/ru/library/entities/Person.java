@@ -5,39 +5,39 @@ import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
 public class Person {
-    private int id;
+    private int personId;
 
     @Pattern(regexp = "[А-Я][а-я]+ [А-Я][а-я]+ [А-Я][а-я]+",
             message = "Корректный формат ФИО: Фамилия Имя Отчество")
     @Size(max = 100, message = "Слишком длинные ФИО")
-    private String initials;
+    private String name;
 
     @Min(value = 1900, message = "Год рождения должен быть после 1900")
     @Size(min = 1, message = "Поле не может быть пустым")
     private int birthYear;
 
-    public Person(int id, String initials, int birthYear) {
-        this.id = id;
-        this.initials = initials;
+    public Person(int id, String name, int birthYear) {
+        this.personId = id;
+        this.name = name;
         this.birthYear = birthYear;
     }
 
     public Person() {}
 
-    public int getId() {
-        return id;
+    public int getPersonId() {
+        return personId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPersonId(int personId) {
+        this.personId = personId;
     }
 
-    public String getInitials() {
-        return initials;
+    public String getName() {
+        return name;
     }
 
-    public void setInitials(String initials) {
-        this.initials = initials;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getBirthYear() {

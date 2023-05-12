@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import ru.library.entities.Person;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class PersonDAO {
@@ -20,5 +21,19 @@ public class PersonDAO {
 
     public List<Person> index(){
         return jdbcTemplate.query("SELECT * FROM people", new BeanPropertyRowMapper<>(Person.class));
+    }
+
+    public void create(Person person){
+        jdbcTemplate.update("INSERT INTO people(name, birth_year) VALUES (?, ?)",
+                person.getName(), person.getBirthYear());
+    }
+
+    public Person show(int id){
+        return jdbcTemplate.query("SELECT * FROM people WHERE person_id = ?",
+                new BeanPropertyRowMapper<>(Person.class), id).stream().findAny().orElse(null);
+    }
+
+    public void delete(int id){
+        jdbcTemplate.update("DELETE FROM people WHERE person_id = ?", id);
     }
 }
