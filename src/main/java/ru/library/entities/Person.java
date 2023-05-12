@@ -1,6 +1,8 @@
 package ru.library.entities;
 
+
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 
@@ -13,7 +15,6 @@ public class Person {
     private String name;
 
     @Min(value = 1900, message = "Год рождения должен быть после 1900")
-    @Size(min = 1, message = "Поле не может быть пустым")
     private int birthYear;
 
     public Person(int id, String name, int birthYear) {
