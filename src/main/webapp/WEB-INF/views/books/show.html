@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${book.getName()}"></title>
+</head>
+<body>
+<p th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}"></p>
+
+<form th:method="GET" th:action="@{/books/{id}/edit(id = ${book.getBookId()})}">
+    <input type="submit" value="Редактировать">
+</form>
+
+</body>
+</html>
