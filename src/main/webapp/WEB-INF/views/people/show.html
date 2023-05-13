@@ -7,6 +7,16 @@
 <body>
 <p style="font-size: 20px" th:text="${person.getName() + ', ' + person.getBirthYear()}"></p>
 
+<div th:if="${#lists.isEmpty(books)}">
+    <p style="font-size: 20px">Человек не взял ни одной книги</p>
+</div>
+
+<div th:unless="${#lists.isEmpty(books)}">
+    <hr>
+    <p style="font-size: 20px; font-weight: bold">Книги:</p>
+    <p style="font-size: 16px" th:each="book : ${books}" th:text="${book.name + ', ' + book.author + ', ' + book.year}"></p>
+</div>
+
 <hr>
 
 <form th:method="GET" th:action="@{/people/{id}/edit(id = ${person.getPersonId()})}">
