@@ -6,17 +6,17 @@
 </head>
 <body>
 <form th:method="PATCH" th:action="@{/people/{id}(id = ${person.getPersonId()})}" th:object="${person}">
-    <label for="name">Введите ФИО читателя: </label>
-    <input type="text" th:field="*{name}" id="name">
+    <label style="font-size: 20px" for="name">Введите ФИО читателя: </label>
+    <input style="font-size: 16px" size="30" type="text" th:field="*{name}" id="name">
     <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
     <br>
 
-    <label for="birthYear">Введите год рождения: </label>
-    <input type="text" th:field="*{birthYear}" id="birthYear">
+    <label style="font-size: 20px" for="birthYear">Введите год рождения: </label>
+    <input style="font-size: 16px" size="4" type="text" th:field="*{birthYear}" id="birthYear">
     <div style="color: red" th:if="${#fields.hasErrors('birthYear')}" th:errors="*{birthYear}"></div>
     <br>
 
-    <input type="submit" value="Сохранить">
+    <input style="font-size: 20px" type="submit" value="Сохранить">
 </form>
 </body>
 </html>

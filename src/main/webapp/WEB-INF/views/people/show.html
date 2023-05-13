@@ -5,15 +5,15 @@
     <title th:text="${person.name}"></title>
 </head>
 <body>
-<p th:text="${person.getName() + ', ' + person.getBirthYear()}"></p>
+<p style="font-size: 20px" th:text="${person.getName() + ', ' + person.getBirthYear()}"></p>
 
 <hr>
 
 <form th:method="GET" th:action="@{/people/{id}/edit(id = ${person.getPersonId()})}">
-    <input type="submit" value="Редактировать">
+    <input style="font-size: 20px" type="submit" value="Редактировать">
 </form>
 <form th:method="DELETE" th:action="@{/people/{id}(id = ${person.getPersonId()})}">
-    <input type="submit" value="Удалить">
+    <input style="font-size: 20px" type="submit" value="Удалить">
 </form>
 </body>
 </html>

@@ -6,19 +6,22 @@
 </head>
 <body>
 <form th:method="PATCH" th:action="@{/books/{id}(id = ${book.getBookId()})}" th:object="${book}">
-    <label for="name">Введите название книги: </label>
-    <input type="text" th:field="*{name}" id="name">
+    <label style="font-size: 20px" for="name">Введите название книги: </label>
+    <input style="font-size: 16px" size="40" type="text" th:field="*{name}" id="name">
+    <div style="color: red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
     <br>
 
-    <label for="author">Введите автора: </label>
-    <input type="text" th:field="*{author}" id="author">
+    <label style="font-size: 20px" for="author">Введите автора: </label>
+    <input style="font-size: 16px" size="15" type="text" th:field="*{author}" id="author">
+    <div style="color: red" th:if="${#fields.hasErrors('author')}" th:errors="*{author}"></div>
     <br>
 
-    <label for="year">Введите год: </label>
-    <input type="text" th:field="*{year}" id="year">
+    <label style="font-size: 20px" for="year">Введите год: </label>
+    <input style="font-size: 16px" size="4" type="text" th:field="*{year}" id="year">
+    <div style="color: red" th:if="${#fields.hasErrors('year')}" th:errors="*{year}"></div>
     <br>
 
-    <input type="submit" value="Сохранить">
+    <input style="font-size: 20px" type="submit" value="Сохранить">
 </form>
 </body>
 </html>
