@@ -10,6 +10,8 @@
 <form th:method="GET" th:action="@{/books/{id}/edit(id = ${book.getBookId()})}">
     <input type="submit" value="Редактировать">
 </form>
-
+<form th:method="DELETE" th:action="@{/books/{id}(id = ${book.getBookId()})}">
+    <input type="submit" value="Удалить">
+</form>
 </body>
 </html>
