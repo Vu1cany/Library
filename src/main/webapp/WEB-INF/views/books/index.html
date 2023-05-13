@@ -6,7 +6,12 @@
 </head>
 <body>
 <p th:each="book : ${books}">
-    <a th:href="@{books/${id}(id = ${book.getBookId()})}" th:text="${book.name} + ', ' + ${book.getYear()}"></a>
+    <a th:href="@{books/{id}(id = ${book.getBookId()})}"
+       th:text="${book.name + ', ' + book.getAuthor() + ', ' + book.getYear()}"></a>
 </p>
+
+<form th:method="GET" th:action="@{/books/new}">
+    <input type="submit" value="Добавить">
+</form>
 </body>
 </html>
