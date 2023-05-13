@@ -6,7 +6,7 @@
 </head>
 <body>
 <p th:each="person : ${people}">
-    <a th:href="@{people/{id}(id = ${person.getPersonId()})}" th:text="${person.getName()}"></a>
+    <a th:href="@{people/{id}(id = ${person.getPersonId()})}" th:text="${person.getName() + ', ' + person.getBirthYear()}"></a>
 </p>
 <form th:action="@{/people/new}">
     <input type="submit" value="Добавить">

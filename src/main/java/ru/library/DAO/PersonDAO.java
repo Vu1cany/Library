@@ -28,6 +28,11 @@ public class PersonDAO {
                 person.getName(), person.getBirthYear());
     }
 
+    public Optional<Person> show(String name){
+        return jdbcTemplate.query("SELECT * FROM people WHERE name = ?",
+                new BeanPropertyRowMapper<>(Person.class), name).stream().findAny();
+    }
+
     public Person show(int id){
         return jdbcTemplate.query("SELECT * FROM people WHERE person_id = ?",
                 new BeanPropertyRowMapper<>(Person.class), id).stream().findAny().orElse(null);

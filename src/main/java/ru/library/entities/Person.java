@@ -1,17 +1,15 @@
 package ru.library.entities;
 
 
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 
 public class Person {
     private int personId;
 
+    @NotEmpty(message = "Поле не может быть пустым")
     @Pattern(regexp = "[А-Я][а-я]+ [А-Я][а-я]+ [А-Я][а-я]+",
             message = "Корректный формат ФИО: Фамилия Имя Отчество")
-    @Size(max = 100, message = "Слишком длинные ФИО")
+    @Size(max = 40, message = "Слишком длинные ФИО")
     private String name;
 
     @Min(value = 1900, message = "Год рождения должен быть после 1900")
