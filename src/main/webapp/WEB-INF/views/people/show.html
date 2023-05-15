@@ -7,6 +7,8 @@
 <body>
 <p style="font-size: 20px" th:text="${person.getName() + ', ' + person.getBirthYear()}"></p>
 
+<hr>
+
 <div th:if="${#lists.isEmpty(books)}">
     <p style="font-size: 20px">Человек не взял ни одной книги</p>
 </div>
@@ -17,13 +19,14 @@
     <p style="font-size: 16px" th:each="book : ${books}" th:text="${book.name + ', ' + book.author + ', ' + book.year}"></p>
 </div>
 
-<hr>
-
 <form th:method="GET" th:action="@{/people/{id}/edit(id = ${person.getPersonId()})}">
     <input style="font-size: 20px" type="submit" value="Редактировать">
 </form>
 <form th:method="DELETE" th:action="@{/people/{id}(id = ${person.getPersonId()})}">
     <input style="font-size: 20px" type="submit" value="Удалить">
+</form>
+<form th:method="GET" th:action="@{/index}">
+    <input style="font-size: 20px" type="submit" value="Вернуться на главную">
 </form>
 </body>
 </html>

@@ -7,16 +7,20 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ru.library.DAO.BookDAO;
+import ru.library.DAO.PersonDAO;
 import ru.library.entities.Book;
+import ru.library.entities.Person;
 
 @Controller
 @RequestMapping("/books")
 public class BooksController {
     private final BookDAO bookDAO;
+    private final PersonDAO personDAO;
 
     @Autowired
-    public BooksController(BookDAO bookDAO) {
+    public BooksController(BookDAO bookDAO, PersonDAO personDAO) {
         this.bookDAO = bookDAO;
+        this.personDAO = personDAO;
     }
 
     @GetMapping()
@@ -26,8 +30,10 @@ public class BooksController {
     }
 
     @GetMapping("/{id}")
-    public String show(@PathVariable("id")int id, Model model){
+    public String show(@PathVariable("id")int id, Model model, @ModelAttribute("person") Person person){
         model.addAttribute("book", bookDAO.show(id));
+        model.addAttribute("owner", bookDAO.owner(id));
+        model.addAttribute("people", personDAO.index());
         return "/books/show";
     }
 
@@ -58,7 +64,7 @@ public class BooksController {
         if (bindingResult.hasErrors()){
             return "/books/edit";
         }
-
+        System.out.println();
         bookDAO.update(book);
         return "redirect:/books";
     }
@@ -67,5 +73,18 @@ public class BooksController {
     public String delete(@PathVariable("id")int id){
         bookDAO.delete(id);
         return "redirect:/books";
+    }
+
+    @PatchMapping("/{id}/free")
+    public String free(@PathVariable("id") int id, Model model){
+        bookDAO.free(id);
+        model.addAttribute("book", bookDAO.show(id));
+        return "redirect:/books/" + id;
+    }
+
+    @PatchMapping("/{id}/assign")
+    public String assign(@PathVariable("id") int id, @ModelAttribute("person") Person person){
+        bookDAO.assign(id, person);
+        return "redirect:/books/" + id;
     }
 }

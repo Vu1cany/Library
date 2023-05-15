@@ -7,6 +7,29 @@
 <body>
 <p style="font-size: 20px" th:text="${book.getName() + ', ' + book.getAuthor() + ', ' + book.getYear()}"></p>
 
+<div th:unless="${#lists.isEmpty(owner)}">
+    <hr>
+    <p style="font-size: 20px" th:text="${'Книга сейчас у: ' + owner.name}"></p>
+    <form th:method="PATCH" th:action="@{/books/{id}/free(id = ${book.getBookId()})}" th:object="${book}">
+        <input style="font-size: 20px" type="submit" value="Освободить">
+    </form>
+</div>
+
+<div th:if="${#lists.isEmpty(owner)}">
+    <hr>
+    <p style="font-size: 20px">Эта книга свободна. Кому назначить ее?</p>
+
+    <form th:method="PATCH" th:action="@{/books/{id}/assign(id = ${book.getBookId()})}">
+        <label for="person" style="font-size: 20px">Выберите человека: </label>
+        <select th:object="${person}" th:field="*{personId}" id="person">
+            <option style="font-size: 20px" th:each="person : ${people}" th:value="${person.getPersonId()}"
+                    th:text="${person.getName()}"></option>
+        </select>
+
+        <input style="font-size: 20px" type="submit" value="Назначить книгу">
+    </form>
+</div>
+
 <hr>
 
 <form th:method="GET" th:action="@{/books/{id}/edit(id = ${book.getBookId()})}">
@@ -14,6 +37,9 @@
 </form>
 <form th:method="DELETE" th:action="@{/books/{id}(id = ${book.getBookId()})}">
     <input style="font-size: 20px" type="submit" value="Удалить">
+</form>
+<form th:method="GET" th:action="@{/index}">
+    <input style="font-size: 20px" type="submit" value="Вернуться на главную">
 </form>
 </body>
 </html>

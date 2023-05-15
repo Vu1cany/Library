@@ -47,10 +47,4 @@ public class PersonDAO {
         jdbcTemplate.update("UPDATE people SET name = ?, birth_year = ? WHERE person_id = ?",
                 person.getName(), person.getBirthYear(), person.getPersonId());
     }
-
-    public List<Book> personBooks(int id){
-        return jdbcTemplate.query("SELECT book_id, books.name, books.author, books.year FROM people JOIN books" +
-                        " ON people.person_id = books.person_id WHERE people.person_id = ?",
-                new BeanPropertyRowMapper<>(Book.class), id);
-    }
 }
