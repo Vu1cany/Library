@@ -14,10 +14,11 @@
 </div>
 
 <div th:unless="${#lists.isEmpty(books)}">
-    <hr>
     <p style="font-size: 20px; font-weight: bold">Книги:</p>
     <p style="font-size: 16px" th:each="book : ${books}" th:text="${book.name + ', ' + book.author + ', ' + book.year}"></p>
 </div>
+
+<hr>
 
 <form th:method="GET" th:action="@{/people/{id}/edit(id = ${person.getPersonId()})}">
     <input style="font-size: 20px" type="submit" value="Редактировать">
