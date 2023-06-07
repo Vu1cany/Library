@@ -11,6 +11,8 @@ import ru.library.DAO.PersonDAO;
 import ru.library.entities.Book;
 import ru.library.entities.Person;
 
+import java.util.Optional;
+
 @Controller
 @RequestMapping("/books")
 public class BooksController {
@@ -32,8 +34,16 @@ public class BooksController {
     @GetMapping("/{id}")
     public String show(@PathVariable("id")int id, Model model, @ModelAttribute("person") Person person){
         model.addAttribute("book", bookDAO.show(id));
-        model.addAttribute("owner", bookDAO.owner(id));
-        model.addAttribute("people", personDAO.index());
+
+        Optional<Person> bookOwner = bookDAO.getBookOwner(id);
+
+        if (bookOwner.isPresent()){
+            model.addAttribute("owner", bookOwner.get());
+
+        } else {
+            model.addAttribute("people", personDAO.index());
+        }
+
         return "/books/show";
     }
 
@@ -64,7 +74,6 @@ public class BooksController {
         if (bindingResult.hasErrors()){
             return "/books/edit";
         }
-        System.out.println();
         bookDAO.update(book);
         return "redirect:/books";
     }
@@ -76,15 +85,15 @@ public class BooksController {
     }
 
     @PatchMapping("/{id}/free")
-    public String free(@PathVariable("id") int id, Model model){
+    public String free(@PathVariable("id") int id){
         bookDAO.free(id);
-        model.addAttribute("book", bookDAO.show(id));
         return "redirect:/books/" + id;
     }
 
     @PatchMapping("/{id}/assign")
-    public String assign(@PathVariable("id") int id, @ModelAttribute("person") Person person){
-        bookDAO.assign(id, person);
+    public String assign(@PathVariable("id") int id, @ModelAttribute("person") Person selectedPerson){
+        //У selectedPerson назначено только поле id, остальные null
+        bookDAO.assign(id, selectedPerson);
         return "redirect:/books/" + id;
     }
 }

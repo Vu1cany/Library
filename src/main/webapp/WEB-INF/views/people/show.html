@@ -9,13 +9,15 @@
 
 <hr>
 
-<div th:if="${#lists.isEmpty(books)}">
+<div th:if="${books.isEmpty()}">
     <p style="font-size: 20px">Человек не взял ни одной книги</p>
 </div>
 
-<div th:unless="${#lists.isEmpty(books)}">
+<div th:if="${!books.isEmpty()}">
     <p style="font-size: 20px; font-weight: bold">Книги:</p>
-    <p style="font-size: 16px" th:each="book : ${books}" th:text="${book.name + ', ' + book.author + ', ' + book.year}"></p>
+    <table th:each="book : ${books}">
+        <tr th:text="${book.name + ', ' + book.author + ', ' + book.year}"></tr>
+    </table>
 </div>
 
 <hr>

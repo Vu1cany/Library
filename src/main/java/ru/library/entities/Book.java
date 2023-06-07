@@ -15,12 +15,10 @@ public class Book {
     @Size(max = 100, message = "Слишком длинные имя и фамилия")
     private String author;
 
-    @NotNull(message = "Поле не может быть пустым")
     @Min(value = 1, message = "Год создания должен быть > 1")
     private int year;
 
-    public Book(int id, String name, String author, int year) {
-        this.bookId = id;
+    public Book(String name, String author, int year) {
         this.name = name;
         this.author = author;
         this.year = year;

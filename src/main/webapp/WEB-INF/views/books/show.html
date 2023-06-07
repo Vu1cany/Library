@@ -9,7 +9,7 @@
 
 <hr>
 
-<div th:unless="${#lists.isEmpty(owner)}">
+<div th:if="${owner}">
 
     <p style="font-size: 20px" th:text="${'Книга сейчас у: ' + owner.name}"></p>
     <form th:method="PATCH" th:action="@{/books/{id}/free(id = ${book.getBookId()})}" th:object="${book}">
@@ -17,7 +17,7 @@
     </form>
 </div>
 
-<div th:if="${#lists.isEmpty(owner)}">
+<div th:if="${people}">
 
     <p style="font-size: 20px">Эта книга свободна. Кому назначить ее?</p>
 

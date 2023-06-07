@@ -15,8 +15,7 @@ public class Person {
     @Min(value = 1900, message = "Год рождения должен быть после 1900")
     private int birthYear;
 
-    public Person(int id, String name, int birthYear) {
-        this.personId = id;
+    public Person(String name, int birthYear) {
         this.name = name;
         this.birthYear = birthYear;
     }
